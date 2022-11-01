@@ -5,9 +5,9 @@ import java.util.ArrayList;
 public class School {
 	private static School instance = new School();
 
-	private static String SCHOOL_Name = "Good School";
-	private ArrayList<Student> studentList = new ArrayList<Student>();
-	private ArrayList<Subject> subjectList = new ArrayList<Subject>();
+	private static final String SCHOOL_Name = "Good School";
+	private final ArrayList<Student> studentList = new ArrayList<>();
+	private ArrayList<Subject> subjectList = new ArrayList<>();
 
 	private School() {
 	}
@@ -27,8 +27,8 @@ public class School {
 		studentList.add(student);
 	}
 
-	public void addSubject(Student subject) {
-		studentList.add(subject);
+	public void addSubject(Subject subject) {
+		subjectList.add(subject);
 	}
 
 	public ArrayList<Subject> getSubjectList() {

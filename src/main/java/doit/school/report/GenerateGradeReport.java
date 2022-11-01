@@ -12,10 +12,12 @@ import doit.utils.Define;
 import java.util.ArrayList;
 
 public class GenerateGradeReport {
+
 	School school = School.getInstance();
-	public static final String TITLE = "수강생 학점\t\t\n";
-	public static final String HEADER = " 이름 | 학번 | 필수과목 | 점수  \n";
-	public static final String LINE = "--------------------------------------";
+
+	public static final String TITLE = "student credit\t\t\n";
+	public static final String HEADER = " Name | Student Code | Required | Score  \n";
+	public static final String LINE = "---------------";
 	public StringBuffer buffer = new StringBuffer();
 
 	public String getReport() {
@@ -54,22 +56,23 @@ public class GenerateGradeReport {
 			getScoreGrade(student, subject.getSubjectId());
 
 			buffer.append("\n");
-			buffer.append(LINE);
 
 		}
+			buffer.append(LINE);
+			buffer.append("\n");
 	}
 
 	public void getScoreGrade(Student student, int subjectId) {
 		ArrayList<Score> scoreList = student.getScoreList();
 		int majorId = student.getMajorSubject().getSubjectId();
 
-		GradeEvaluation[] gradeEvaluation ={new BasicEvaluation(), new MajorEvaluation()};
+		GradeEvaluation[] gradeEvaluation = {new BasicEvaluation(), new MajorEvaluation()};
 
-		for (int i =0; i<scoreList.size(); i++){
+		for (int i = 0; i < scoreList.size(); i++) {
 			Score score = scoreList.get(i);
-			if (score.getSubject().getSubjectId() == subjectId){
+			if (score.getSubject().getSubjectId() == subjectId) {
 				String grade;
-				if (score.getSubject().getSubjectId() == majorId){
+				if (score.getSubject().getSubjectId() == majorId) {
 					grade = gradeEvaluation[Define.SAB_TYPE].getGrade(score.getPoint());
 				} else {
 					grade = gradeEvaluation[Define.AB_TYPE].getGrade(score.getPoint());
@@ -79,7 +82,7 @@ public class GenerateGradeReport {
 				buffer.append(":");
 				buffer.append(grade);
 				buffer.append("|");
-	}
+			}
 		}
 
 	}
@@ -87,6 +90,5 @@ public class GenerateGradeReport {
 	private void MakeFooter() {
 		buffer.append("\n");
 	}
-
 
 }
